@@ -15,7 +15,7 @@ def run_command(command):
         return False
 
 def extract_date_from_filename(filename):
-    """Extract date from filename like yellow_tripdata_2023-01.csv"""
+    """Extract date from filename like yellow_tripdata_2025-01.csv"""
     try:
         # Extract the date part from filename
         date_str = filename.split('_')[-1].replace('.csv', '')
@@ -25,7 +25,7 @@ def extract_date_from_filename(filename):
         return None
 
 def main():
-    print("Combining 2023 CSV files and saving to /MIT805A1 folder...")
+    print("Combining 2025 CSV files and saving to /MIT805A1 folder...")
     
     # Create the /MIT805A1 directory in HDFS if it doesn't exist
     output_path = "/MIT805A1/"
@@ -37,7 +37,7 @@ def main():
         
         # List all CSV files in the HDFS directory
         print("Listing CSV files in HDFS...")
-        result = subprocess.run(f"hdfs dfs -ls /user/MukondeleliNegukhula/nyc_taxi/csv_yellow_2023/", 
+        result = subprocess.run(f"hdfs dfs -ls /user/MukondeleliNegukhula/nyc_taxi/csv_yellow_2025/", 
                               shell=True, capture_output=True, text=True)
         
         if result.returncode != 0:
@@ -93,7 +93,7 @@ def main():
         combined_df = pd.concat(all_data_frames, ignore_index=True)
         
         # 4. Save combined CSV
-        combined_filename = "nyc_taxi_2023_combined_yellow.csv"
+        combined_filename = "nyc_taxi_2025_combined_yellow.csv"
         local_combined_path = os.path.join(temp_dir, combined_filename)
         
         print(f"Saving combined file with {len(combined_df)} rows...")

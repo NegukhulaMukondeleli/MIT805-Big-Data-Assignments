@@ -22,16 +22,16 @@ def main():
     print("Creating 2023 CSV using local conversion...")
     
     # Create output directory in HDFS
-    output_path = "/user/MukondeleliNegukhula/nyc_taxi/csv_yellow_2023/"
+    output_path = "/user/MukondeleliNegukhula/nyc_taxi/csv_yellow_2025/"
     run_command(f"hdfs dfs -mkdir -p {output_path}")
     
     # Process each 2023 file individually
     for month in range(1, 13):
         month_str = str(month).zfill(2)  # Convert 1 to '01', 2 to '02', etc.
-        input_file = f"/user/MukondeleliNegukhula/nyc_taxi/raw/yellow_tripdata_2023-{month_str}.parquet"
-        output_file = f"yellow_tripdata_2023-{month_str}.csv"
+        input_file = f"/user/MukondeleliNegukhula/nyc_taxi/raw/yellow_tripdata_2025-{month_str}.parquet"
+        output_file = f"yellow_tripdata_2025-{month_str}.csv"
         
-        print(f"Processing 2023-{month_str}...")
+        print(f"Processing 2025-{month_str}...")
         
         # Check if file exists in HDFS
         if not run_command(f"hdfs dfs -test -e {input_file}"):
@@ -61,11 +61,11 @@ def main():
             # 3. Upload CSV back to HDFS
             print(f"  Uploading to HDFS...")
             if run_command(f"hdfs dfs -put {local_csv} {output_path}"):
-                print(f"  ✅ Successfully processed 2023-{month_str}")
+                print(f"  ✅ Successfully processed 2025-{month_str}")
             else:
-                print(f"  ❌ Upload failed for 2023-{month_str}")
+                print(f"  ❌ Upload failed for 2025-{month_str}")
     
-    print("✅ All 2023 files processed!")
+    print("✅ All 2025 files processed!")
     print(f"Final output in HDFS: {output_path}")
     
     # Show the final results
